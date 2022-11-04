@@ -1,0 +1,46 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Font configuration
+font:
+  normal:
+    family: JetBrains Mono
+    style: Regular
+  bold:
+    family: JetBrains Mono
+    style: Bold
+  italic:
+    family: JetBrains Mono
+    style: Thin
+
+# Colors (Dracula)
+colors:
+  # Default colors
+  primary:
+    background: '#101010'
+    foreground: '#f8f8f2'
+
+  # Normal colors
+  normal:
+    black:   '#000000'
+    red:     '#ff5050'
+    green:   '#50ff50'
+    yellow:  '#ffff50'
+    blue:    '#5050ff'
+    magenta: '#ff50ff'
+    cyan:    '#50ffff'
+    white:   '#ffffff'
+
+  # Bright colors
+  bright:
+    black:   '#303030'
+    red:     '#ff6060'
+    green:   '#60ff60'
+    yellow:  '#ffff60'
+    blue:    '#6060ff'
+    magenta: '#ff60ff'
+    cyan:    '#60ffff'
+    white:   '#ffffff'
+
+      # Key Bindings
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }

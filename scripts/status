@@ -1,0 +1,73 @@
+#!/bin/sh
+
+MUSIC=$(cat ~/.config/mpd/mpd_status)
+UPDATES=$(pacman -Quq | wc -l | awk '$1 == 1 {print $1 " Update"}; $1 != 1{print $1 " Updates"}')
+CPU=$(top -b -n 1 | grep Cpu | awk '{printf("%d",$2+$4)}')
+TEMP=$(cat /sys/class/thermal/thermal_zone3/temp | awk '{print($1/1000)}')
+MEMORY=$(free -h | awk '$1=="Mem:"{print $3}' | sed 's/Gi/ GiB/g' | sed 's/Mi/ MiB/g')
+BATTERY=$(cat /sys/class/power_supply/BAT1/capacity)
+BAT_SYMBOL="■■■■▪"
+if [[ BATTERY -eq 100 ]]; then
+    BAT_SYMBOL="■■■■▪"
+elif [[ BATTERY -gt 95 ]]; then
+    BAT_SYMBOL="■■■■▫"
+elif [[ BATTERY -gt 88 ]]; then
+    BAT_SYMBOL="■■■◧▫"
+elif [[ BATTERY -gt 75 ]]; then
+    BAT_SYMBOL="■■■◫▫"
+elif [[ BATTERY -gt 63 ]]; then
+    BAT_SYMBOL="■■◧◫▫"
+elif [[ BATTERY -gt 50 ]]; then
+    BAT_SYMBOL="■■◫◫▫"
+elif [[ BATTERY -gt 38 ]]; then
+    BAT_SYMBOL="■◧◫◫▫"
+elif [[ BATTERY -gt 25 ]]; then
+    BAT_SYMBOL="■◫◫◫▫"
+elif [[ BATTERY -gt 13 ]]; then
+    BAT_SYMBOL="◧◫◫◫▫"
+else
+    BAT_SYMBOL="⚠ ◫◫◫◫▫"
+fi
+BATTERY_STATUS=$(cat /sys/class/power_supply/BAT1/status | sed 's/Charging/ ⚡/' | sed 's/Discharging//' | sed 's/Full/ ⚡/' | sed 's/Not charging/ ⚡/')
+SCRBRGHT=$(scrbrightness)
+if [ $(($SCRBRGHT/100)) -eq 0 ]
+then SCRBRGHT=$(echo -n " $SCRBRGHT")
+    if [ $(($SCRBRGHT/10)) -eq 0 ]
+        then SCRBRGHT=$(echo -n " $SCRBRGHT")
+    fi
+fi
+VOLUME=$(pamixer --get-volume-human | sed 's/muted/MUTE/g')
+if [ $(echo -n $VOLUME | wc -m) -lt 4 ]
+    then VOLUME=$(echo -n " $VOLUME")
+    if [ $(echo -n $VOLUME | wc -m) -lt 3 ]
+        then VOLUME=$(echo -n " $VOLUME")
+    fi
+fi
+WIFI_NAME=$(nmcli device | awk '$1=="wlo1"{print $4}' | sed 's/(getting/Connecting.../')
+WIFI_STRENGTH=$(nmcli device wifi list | awk '$1 == "*"{print $9}' | wc -m)
+if [[ WIFI_STRENGTH -gt 1 ]]; then
+    WIFI_BARS="▂"
+    if [[ WIFI_STRENGTH -gt 2 ]]; then
+       WIFI_BARS="$WIFI_BARS▄" 
+       if [[ WIFI_STRENGTH -gt 3 ]]; then
+            WIFI_BARS="$WIFI_BARS▆" 
+            if [[ WIFI_STRENGTH -gt 4 ]]; then
+               WIFI_BARS="$WIFI_BARS█" 
+            else
+                WIFI_BARS="$WIFI_BARS "
+            fi
+       else
+           WIFI_BARS="$WIFI_BARS  "
+       fi
+    else
+        WIFI_BARS="$WIFI_BARS   "
+    fi
+else
+    WIFI_BARS="    "
+fi
+DATE=$(date +'%A %e/%m/%Y %k:%M')
+
+
+echo " $MUSIC | $UPDATES | RAM: $MEMORY | CPU: $CPU% $TEMPºC | $BAT_SYMBOL$BATTERY_STATUS | SCR: $SCRBRGHT% | VOL: $VOLUME | $WIFI_NAME $WIFI_BARS | $DATE "
+
+

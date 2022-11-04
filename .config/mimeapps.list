@@ -1,0 +1,29 @@
+[Added Associations]
+image/png=org.nomacs.ImageLounge.desktop;
+inode/directory=pcmanfm.desktop;xarchiver.desktop;thunar.desktop;
+text/x-haskell=vim.desktop;nvim.desktop;
+x-scheme-handler/geo=qwant-maps-geo-handler.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+application/pdf=org.pwmt.zathura.desktop;xreader.desktop;llpp.desktop;
+application/x-ipynb+json=jupyter-notebook.desktop;
+text/plain=vim.desktop;nvim.desktop;
+application/x-java-archive=userapp-java -jar-IKPWK1.desktop;userapp-java-SG2OK1.desktop;userapp-java-THYSK1.desktop;
+application/octet-stream=vim.desktop;
+
+[Default Applications]
+inode/directory=pcmanfm.desktop
+x-scheme-handler/geo=qwant-maps-geo-handler.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+application/pdf=xreader.desktop
+application/x-ipynb+json=jupyter-notebook.desktop
+text/plain=vim.desktop
+text/x-haskell=vim.desktop
+application/x-java-archive=userapp-java -jar-IKPWK1.desktop
+application/octet-stream=vim.desktop
+x-scheme-handler/discord-668477264995811338=nuclear.desktop
+x-scheme-handler/discord-482370205331226644=discord-482370205331226644.desktop
+x-scheme-handler/msteams=teams-for-linux.desktop
+
+[Removed Associations]

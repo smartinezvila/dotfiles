@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-scale '/home/scott/Pictures/Wallpapers/White Wallpaper 1.jpg' 

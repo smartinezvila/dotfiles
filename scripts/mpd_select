@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mpc clear
+\ls ~/Music | rofi -dmenu | mpc add && mpc play -q
+mpd_stat

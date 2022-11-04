@@ -1,0 +1,5 @@
+#!/bin/sh
+
+FOLDER=$(mpc current -f %file% | awk -F / '{print $1}')
+SONG=$(mpc current -f %file% | awk -F / '{print $2}' | sed 's/.wav//' | sed 's/.mp3//')
+echo -n "$FOLDER: $SONG" > ~/.config/mpd/mpd_status

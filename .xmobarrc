@@ -1,0 +1,35 @@
+Config{ overrideRedirect = False
+    , font	 ="xft:JetBrains Mono:size=12:bold:antialias=true"
+    , bgColor  ="#202020"
+    , fgColor  ="#cccccc"
+    , alpha    = 230
+    , position = Top
+    , commands = [ 
+        Run Cpu ["--template","<fc=#f4f99d>CPU <total>%</fc>"] 10
+       ,Run CoreTemp ["--template","<fc=#f4f99d><core0>ºC</fc>",
+            "-L", "40", "-H", "60",
+            "-l", "#c6f9b0", "-n", "#f4f99d", "-h", "#ffd09d"] 10 
+	   ,Run Memory ["--template","<fc=#ff5555>RAM <usedratio>%</fc>"] 10
+	   ,Run Battery [
+			"-t","<fc=#50fa7b>BAT <left>% <acstatus></fc>", 
+            "-L", "10", "-H", "80",
+			"-l", "red",
+            "--", "-O", "On",
+            "-L", "-15", "-H", "-5",
+      		"-l", "red", "-m", "blue", "-h", "green"
+			] 10 
+	   ,Run Date "%a %d/%m/%Y <fc=#9aedfe>%H:%M:%S</fc>" "date" 10
+       ,Run StdinReader
+	   ,Run Volume "default" "Master" [
+            "--template","<fc=#caa9fa>VOL <volume>%<status></fc>",
+            "--","--on","","--off"," MUTE"
+            ] 5
+       ,Run Brightness [
+            "--template","SB <percent>%",
+            "--","-D","intel_backlight"
+            ] 5
+       ] 
+	, sepChar = "%"
+	, alignSep ="}{"
+	, template = " <icon=/home/scott/icons/haskell.xbm/> %StdinReader% }{%cpu% %coretemp% | %memory% | %battery% | %bright% | %default:Master% | %date% "
+}
